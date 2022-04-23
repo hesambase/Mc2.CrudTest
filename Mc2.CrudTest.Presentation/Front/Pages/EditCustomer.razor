@@ -1,0 +1,65 @@
+﻿<h3>EditCustomer</h3>
+
+@page "/editperson/{Id}"
+@using Mc2.CrudTest.Shared
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
+<h2>Edit Customer</h2>
+<div class="row">
+        <div class="col-md-6">
+                <div class="form-group">
+                        <label for="FirstName"> First Name *</label>
+                        <input form="FirstName" class="form-control" @bind="@customer.FirstName" />
+                    </div>
+            </div>
+        <div class="col-md-6">
+                <div class="form-group">
+                        <label for="LastName"> Last Name *</label>
+                        <input form="LastName" class="form-control" @bind="@customer.LastName" />
+                    </div>
+            </div>
+        <div class="col-md-6">
+                <div class="form-group">
+                        <label for="Email"> Email *</label>
+                        <input form="Email" class="form-control" @bind="@customer.Email" />
+                    </div>
+            </div>
+        <div class="col-md-6">
+                <div class="form-group">
+                        <label for="MobileNo"> Phone No *</label>
+                        <input form="mobileNo" class="form-control" @bind="@customer.PhoneNumber" />
+                    </div>
+            </div>
+</div>
+<div class="row">
+        <div class="col-md-4">
+                <div class="form-group">
+                        <input type="button" class="btn btn-primary" @onclick="@Save" value="Save" />
+                        <input type="button" class="btn" @onclick="@Cancel" value="Cancel" />
+                    </div>
+            </div>
+</div>
+@code {
+    [Parameter]
+    public string Id { get; set; }
+    CustomerViewModel person = new CustomerViewModel();
+    protected override async Task OnInitializedAsync()
+    {
+        customer = await Http.GetFromJsonAsync<CustomerViewModel>("api/customer/" + Id);
+    }
+    protected async Task Save()
+    {
+        var response = await Http.PutAsJsonAsync("api/customer/" + Id, @customer);
+        bool customerResponse = await response.Content.ReadFromJsonAsync<bool>();
+        if (customerResponse)
+        {
+            await JsRuntime.InvokeVoidAsync("alert", "Updated Successfully!");
+            NavigationManager.NavigateTo("customerlist");
+        }
+    }
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("customerlist");
+    }
+        }

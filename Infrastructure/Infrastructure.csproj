@@ -13,11 +13,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Mc2.CrudTest.Core\Mc2.CrudTest.Core.csproj" />
+    <ProjectReference Include="..\Mc2.CrudTest.Presentation\Front\Mc2.CrudTest.Presentation.Front.csproj" />
+    <ProjectReference Include="..\Mc2.CrudTest.Presentation\Shared\Mc2.CrudTest.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Migrations\" />
-    <Folder Include="Specifications\" />
   </ItemGroup>
 
 </Project>

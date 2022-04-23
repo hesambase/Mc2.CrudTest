@@ -1,0 +1,50 @@
+﻿<h3>CustomerList</h3>
+@page "/personlist"
+@using Mc2.CrudTest.Shared
+@inject HttpClient _httpClient
+<h1>Personal Detail</h1>
+<div>
+    <a href="/addCustomer"> Create New Customer</a>
+    @if (personList != null)
+    {
+
+        public int Id { get; set; }
+        <table class="table-bordered">
+            <thead>
+                <tr>
+                    <th width = "30%">Firstname</th>
+                    <th width = "20%">Lastname</th>
+                    <th width = "20%">DateOfBirth</th>
+                    <th width = "30%">PhoneNumber</th>
+                    <th width = "30%">Email</th>
+                    <th width = "30%">BankAccountNumber</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in personList)
+                {
+                    <tr>
+                        <td>
+                            @p.FirstName @p.LastName
+                        </td>
+                    <td>@p.Email</td>
+                    <td>@p.MobileNo</td>
+                    <td>
+                        <a href="/editcustomer/@p.Id">Edit</a> |
+                        <a href="/deletecustomer/@p.Id">Delete</a>
+                    </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+@code {
+    List<CustomerViewModel> customerList = new List<CustomerViewModel>();
+    protected override async Task OnInitializedAsync()
+    {
+        var response = await _httpClient.GetAsync("api/customer");
+        response.EnsureSuccessStatusCode();
+        customerList = await response.Content.ReadFromJsonAsync<List<CustomerViewModel>>();
+    }
+}

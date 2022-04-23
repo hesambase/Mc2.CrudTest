@@ -1,0 +1,76 @@
+﻿<h3>AddPerson</h3>
+
+@page "/addcustomer"
+@using Mc2.CrudTest.Shared
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
+<h2>Add Person</h2>
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="FirstName"> First Name *</label>
+            <input form="FirstName" class="form-control" @bind="@customer.FirstName" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="LastName"> Last Name *</label>
+            <input form="LastName" class="form-control" @bind="@customer.LastName" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="Email"> Email *</label>
+            <input form="Email" class="form-control" @bind="@customer.Email" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="MobileNo"> Phone No *</label>
+            <input form="mobileNo" class="form-control" @bind="@customer.PhoneNumber" />
+        </div>
+    </div>
+     <div class="col-md-6">
+        <div class="form-group">
+            <label for="MobileNo"> Dater of Birth *</label>
+            <input form="mobileNo" class="form-control" @bind="@customer.DateOfBirth" />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="MobileNo"> Bank Account No *</label>
+            <input form="mobileNo" class="form-control" @bind="@customer.BankAccountNumber" />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <input type="button" class="btn btn-primary" @onclick="@Save" value="Save" />
+            <input type="button" class="btn" @onclick="@Cancel" value="Cancel" />
+        </div>
+    </div>
+</div>
+@code {
+    CustomerViewModel customer = new CustomerViewModel();
+    protected override async Task OnInitializedAsync()
+    {
+    }
+    protected async Task Save()
+    {
+        var response = await Http.PostAsJsonAsync("api/Customer", @customer);
+        CustomerViewModel customerResponse = await response.Content.ReadFromJsonAsync<CustomerViewModel>();
+        if (customerResponse?.Id > 0)
+        {
+            await JsRuntime.InvokeVoidAsync("alert", "Saved Successfully!");
+            NavigationManager.NavigateTo("customerlist");
+        }
+    }
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("customerlist");
+    }
+    }

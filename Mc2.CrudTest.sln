@@ -11,9 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.Shared", "Mc2.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.Presentation.Server", "Mc2.CrudTest.Presentation\Server\Mc2.CrudTest.Presentation.Server.csproj", "{8D41010B-AEF1-4742-B7EC-6A5AE62C45FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.Core", "Mc2.CrudTest.Core\Mc2.CrudTest.Core.csproj", "{779E4C3F-707C-40B8-94A4-728DB46615B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.Core", "Mc2.CrudTest.Core\Mc2.CrudTest.Core.csproj", "{779E4C3F-707C-40B8-94A4-728DB46615B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{DC44F770-85AD-47DB-9D91-B262189A9767}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{DC44F770-85AD-47DB-9D91-B262189A9767}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
